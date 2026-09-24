@@ -7,15 +7,18 @@ plugins {
 
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
+
 if (!keystorePropertiesFile.exists()) {
     keystorePropertiesFile = file('key.properties')
 }
+
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
 android {
     namespace = "com.studycompete.app"
+
     compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
@@ -30,19 +33,28 @@ android {
 
     defaultConfig {
         applicationId = "com.studycompete.app"
+
         minSdk = 26
         targetSdk = 34
+
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
         multiDexEnabled = true
     }
 
     signingConfigs {
         release {
-            if (keystorePropertiesFile.exists() && keystoreProperties.getProperty('keyAlias')) {
+            if (keystorePropertiesFile.exists() &&
+                keystoreProperties.getProperty('keyAlias')) {
+
                 keyAlias = keystoreProperties.getProperty('keyAlias')
                 keyPassword = keystoreProperties.getProperty('keyPassword')
-                storeFile = keystoreProperties.getProperty('storeFile') ? file(keystoreProperties.getProperty('storeFile')) : null
+
+                storeFile = keystoreProperties.getProperty('storeFile')
+                    ? file(keystoreProperties.getProperty('storeFile'))
+                    : null
+
                 storePassword = keystoreProperties.getProperty('storePassword')
             }
         }
@@ -50,14 +62,21 @@ android {
 
     buildTypes {
         release {
-            if (keystorePropertiesFile.exists() && keystoreProperties.getProperty('keyAlias')) {
+            if (keystorePropertiesFile.exists() &&
+                keystoreProperties.getProperty('keyAlias')) {
+
                 signingConfig = signingConfigs.release
             } else {
                 signingConfig = signingConfigs.debug
             }
+
             minifyEnabled false
             shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            proguardFiles(
+                getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard-rules.pro'
+            )
         }
     }
 }
