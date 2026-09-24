@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFF3730A3); // deep indigo
-  static const Color secondary = Color(0xFF7C3AED); // violet
-  static const Color accent = Color(0xFF06B6D4); // cyan accent
+  static const Color primary = Color(0xFF3730A3);
+  static const Color secondary = Color(0xFF7C3AED);
+  static const Color accent = Color(0xFF06B6D4);
 
   static const Color surfaceLight = Color(0xFFFDFBFF);
   static const Color backgroundLight = Color(0xFFF5F3F7);
@@ -19,7 +19,6 @@ TextTheme _buildTextTheme(TextTheme base) {
 
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
-
   colorScheme: ColorScheme.fromSeed(
     seedColor: AppColors.primary,
     secondary: AppColors.secondary,
@@ -27,9 +26,7 @@ final ThemeData lightTheme = ThemeData(
     surface: AppColors.surfaceLight,
     brightness: Brightness.light,
   ),
-
   textTheme: _buildTextTheme(ThemeData.light().textTheme),
-
   appBarTheme: AppBarTheme(
     centerTitle: false,
     elevation: 0,
@@ -40,7 +37,6 @@ final ThemeData lightTheme = ThemeData(
       color: const Color(0xFF1C1B1F),
     ),
   ),
-
   cardTheme: CardTheme(
     elevation: 0,
     shape: RoundedRectangleBorder(
@@ -50,7 +46,6 @@ final ThemeData lightTheme = ThemeData(
       ),
     ),
   ),
-
   filledButtonTheme: FilledButtonThemeData(
     style: FilledButton.styleFrom(
       backgroundColor: AppColors.primary,
@@ -63,16 +58,13 @@ final ThemeData lightTheme = ThemeData(
       ),
     ),
   ),
-
   chipTheme: ChipThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),
     ),
   ),
-
   navigationBarTheme: NavigationBarThemeData(
     indicatorColor: AppColors.primary.withOpacity(0.12),
-
     iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
       (states) {
         if (states.contains(MaterialState.selected)) {
@@ -86,7 +78,6 @@ final ThemeData lightTheme = ThemeData(
         );
       },
     ),
-
     labelTextStyle:
         MaterialStateProperty.resolveWith<TextStyle>(
       (states) {
@@ -106,7 +97,6 @@ final ThemeData lightTheme = ThemeData(
 
 final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
-
   colorScheme: ColorScheme.fromSeed(
     seedColor: AppColors.primary,
     secondary: AppColors.secondary,
@@ -114,9 +104,7 @@ final ThemeData darkTheme = ThemeData(
     surface: AppColors.surfaceDark,
     brightness: Brightness.dark,
   ),
-
   textTheme: _buildTextTheme(ThemeData.dark().textTheme),
-
   appBarTheme: AppBarTheme(
     centerTitle: false,
     elevation: 0,
@@ -128,7 +116,6 @@ final ThemeData darkTheme = ThemeData(
       color: Colors.white,
     ),
   ),
-
   cardTheme: CardTheme(
     elevation: 0,
     shape: RoundedRectangleBorder(
@@ -138,7 +125,6 @@ final ThemeData darkTheme = ThemeData(
       ),
     ),
   ),
-
   filledButtonTheme: FilledButtonThemeData(
     style: FilledButton.styleFrom(
       backgroundColor: AppColors.primary,
@@ -151,18 +137,14 @@ final ThemeData darkTheme = ThemeData(
       ),
     ),
   ),
-
   chipTheme: ChipThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),
     ),
   ),
-
   navigationBarTheme: NavigationBarThemeData(
     backgroundColor: AppColors.surfaceDark,
-
     indicatorColor: AppColors.primary.withOpacity(0.18),
-
     iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
       (states) {
         if (states.contains(MaterialState.selected)) {
@@ -176,7 +158,6 @@ final ThemeData darkTheme = ThemeData(
         );
       },
     ),
-
     labelTextStyle:
         MaterialStateProperty.resolveWith<TextStyle>(
       (states) {
