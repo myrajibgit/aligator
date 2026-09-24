@@ -1,0 +1,66 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 2214 >>
+stream
+BT /F1 18 Tf 50 740 Td (Standard Secondary Mathematics Curriculum) Tj ET
+BT /F1 12 Tf 50 718 Td (Subject Code: MATH-10 | Official Academic Curriculum) Tj ET
+BT /F1 10 Tf 50 700 Td (Verified learning outcomes and required chapter competencies for students.) Tj ET
+BT /F1 12 Tf 50 660 Td (Chapter 1: Real Numbers & Number Systems) Tj ET
+BT /F1 9 Tf 65 644 Td (- Euclid division lemma) Tj ET
+BT /F1 9 Tf 65 631 Td (- Fundamental theorem of arithmetic) Tj ET
+BT /F1 9 Tf 65 618 Td (- Irrational proofs) Tj ET
+BT /F1 9 Tf 65 605 Td (- Decimal expansions) Tj ET
+BT /F1 12 Tf 50 582 Td (Chapter 2: Polynomials & Algebraic Expressions) Tj ET
+BT /F1 9 Tf 65 566 Td (- Geometrical representation of zeroes) Tj ET
+BT /F1 9 Tf 65 553 Td (- Relationship between zeroes and coefficients) Tj ET
+BT /F1 9 Tf 65 540 Td (- Division algorithm) Tj ET
+BT /F1 12 Tf 50 517 Td (Chapter 3: Linear Equations in Two Variables) Tj ET
+BT /F1 9 Tf 65 501 Td (- Graphical method of solution) Tj ET
+BT /F1 9 Tf 65 488 Td (- Substitution method) Tj ET
+BT /F1 9 Tf 65 475 Td (- Elimination method) Tj ET
+BT /F1 9 Tf 65 462 Td (- Cross-multiplication) Tj ET
+BT /F1 12 Tf 50 439 Td (Chapter 4: Quadratic Equations) Tj ET
+BT /F1 9 Tf 65 423 Td (- Standard form ax2+bx+c=0) Tj ET
+BT /F1 9 Tf 65 410 Td (- Factorisation method) Tj ET
+BT /F1 9 Tf 65 397 Td (- Completing the square) Tj ET
+BT /F1 9 Tf 65 384 Td (- Quadratic formula and discriminant) Tj ET
+BT /F1 12 Tf 50 361 Td (Chapter 5: Arithmetic Progressions) Tj ET
+BT /F1 9 Tf 65 345 Td (- nth term of an AP) Tj ET
+BT /F1 9 Tf 65 332 Td (- Sum of first n terms) Tj ET
+BT /F1 9 Tf 65 319 Td (- Real-life word problems) Tj ET
+BT /F1 12 Tf 50 296 Td (Chapter 6: Introduction to Trigonometry) Tj ET
+BT /F1 9 Tf 65 280 Td (- Trigonometric ratios sin cos tan) Tj ET
+BT /F1 9 Tf 65 267 Td (- Ratios of specific angles 30 45 60) Tj ET
+BT /F1 9 Tf 65 254 Td (- Complementary angles) Tj ET
+BT /F1 9 Tf 65 241 Td (- Trigonometric identities) Tj ET
+BT /F1 12 Tf 50 218 Td (Chapter 7: Statistics & Probability) Tj ET
+BT /F1 9 Tf 65 202 Td (- Mean median mode of grouped data) Tj ET
+BT /F1 9 Tf 65 189 Td (- Cumulative frequency graphs) Tj ET
+BT /F1 9 Tf 65 176 Td (- Empirical probability and outcomes) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2576
+%%EOF

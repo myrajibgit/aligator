@@ -1,0 +1,53 @@
+================================================================================
+PHASE 3 BLUEPRINT: MISSION VERIFICATION ENGINES (FITNESS & OCR STUDY)
+================================================================================
+Goal: Elevate daily missions from simple manual checklists to verified, anti-cheat
+academic and fitness habit routines.
+
+1. FITNESS MISSION: 30-MINUTE ACTIVITY WITH SENSOR CROSS-CHECK
+--------------------------------------------------------------------------------
+- Design Decision (per approved plan):
+  * Avoid intrusive battery-draining continuous camera ML tracking.
+  * Utilize an in-app 30-minute timer cross-verified against Google Fit / Apple Health.
+
+- Technical Workflow:
+  1. Student taps 'Start 30-Min Workout' in the daily missions tab.
+  2. Flutter app records workoutStartTime and begins a 30-minute countdown timer.
+  3. Background service maintains countdown notifications.
+  4. Upon timer completion, app invokes the 'health' Flutter package:
+     - Queries HealthKit (iOS) or Health Connect / Google Fit (Android).
+     - Samples step counts, active energy burned, or active minutes recorded
+       during [workoutStartTime, workoutEndTime].
+  5. Verification Threshold:
+     - Minimum 300 steps or >=15 active minutes during the half-hour window.
+  6. Success: Sets FitnessMission.status = 'completed', fitStepsVerified = true,
+     and awards +30 XP.
+
+2. STUDY VERIFICATION MISSION: PHOTO -> OCR -> QUESTION BANK QUIZ
+--------------------------------------------------------------------------------
+- User Journey:
+  1. Student completes studying a chapter in their physical textbook or notebook.
+  2. Student taps 'Verify Study Page' -> opens in-app camera with page-alignment box.
+  3. Photo is captured and processed on-device (privacy-first: raw photo does not
+     need to leave the phone unless flagged).
+
+- On-Device OCR Pipeline (Google ML Kit):
+  * Package: google_mlkit_text_recognition
+  * InputImage is processed on background isolate.
+  * Returns recognized text blocks and lines.
+
+- Chapter Keyword Matching Algorithm:
+  * App retrieves tagged chapter keywords for the student's enrolled subjects
+    (e.g., Physics -> Chapter: Electricity -> ["resistor", "current", "ohm", "voltage", "amperage"]).
+  * Text matching engine counts keyword density and TF-IDF relevance.
+  * Identifies matched chapter with >85% confidence score.
+
+- Instant Knowledge Check:
+  * Once the chapter is identified, app queries /questionBank/{subjectId}/chapters/{chapterId}/questions.
+  * Serves 3 to 5 targeted questions specifically from that matched chapter.
+  * Correct answers above 60% unlocks the Study Mission badge and awards +80 XP.
+
+- Anti-Cheat Countermeasures:
+  * Daily quota: 1 study verification per subject per calendar day.
+  * Image hash caching: Prevents photographing the exact same page repeatedly.
+================================================================================

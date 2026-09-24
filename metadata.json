@@ -1,0 +1,6 @@
+{
+  "name": "StudyCompete",
+  "description": "Gamified RPG Solo-Leveling Study & Competition Platform for students",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,71 @@
+================================================================================
+PHASE 2 BLUEPRINT: SOCIAL LAYER, SCOPED CHAT & STUDY PARTIES
+================================================================================
+Goal: Provide safe, hyper-localized social connection scoped exclusively to a
+student's actual school, class, and area.
+
+1. SCOPE & PRIVACY CONSTRAINTS
+--------------------------------------------------------------------------------
+- Strict Boundary: Students can ONLY discover, search, and message peers who
+  belong to the exact same School ID and Class/Grade ID in their designated Area.
+- Global stranger browsing is strictly disallowed.
+- Privacy Guard: Exact phone numbers and personal emails are never exposed.
+  Only Display Name, @username, Avatar, and Level/Stats are visible.
+
+2. PEER DIRECTORY & 1-ON-1 DIRECT MESSAGING (DMs)
+--------------------------------------------------------------------------------
+- Classmate Directory Screen (lib/features/social/screens/peers_screen.dart):
+  * Real-time query to /users where schoolId == user.schoolId and classId == user.classId.
+  * Shows classmate avatar, name, handle, level, and 'Message' button.
+  * Excludes users who are in currentUser.blockedUids or who blocked currentUser.
+
+- Chat Channel Schema (/chats/{chatId}):
+  * type: "dm" | "party"
+  * memberUids: [uid1, uid2]
+  * lastMessage: { text, senderUid, timestamp }
+  * createdAt, updatedAt
+
+- Messages Subcollection (/chats/{chatId}/messages/{messageId}):
+  * senderUid: string
+  * text: string
+  * timestamp: FieldValue.serverTimestamp()
+  * status: "sent" | "delivered" | "read"
+  * reported: boolean (default: false)
+
+- UI Implementation (lib/features/social/screens/chat_screen.dart):
+  * Real-time stream listening to /messages ordered by timestamp descending.
+  * Bubble styling: Primary color for sender, neutral surface for recipient.
+  * Timeago indicators and optimistic message sending.
+
+3. STUDY PARTIES (SQUADS OF 2 TO 6 MEMBERS)
+--------------------------------------------------------------------------------
+- Concept: Small collaborative study circles (min 2, max 6 students).
+- Features:
+  * Any user can create a party and name it (e.g. "Calculus Crusaders").
+  * Party Leader can generate a 6-digit invite code or invite classmates directly.
+  * Public Party Roster: Classmates can view active parties in their class.
+  * Party Members can leave at any time; leadership transfers automatically.
+  * Even after a member leaves, party roster history remains visible.
+
+- Party Schema (/parties/{partyId}):
+  * id: string
+  * name: string
+  * schoolId: string, classId: string
+  * leaderUid: string
+  * memberUids: string[] (enforced: 2 <= length <= 6)
+  * inviteCode: string (unique alphanumeric)
+  * chatId: string (links to group chat document in /chats)
+  * createdAt: timestamp
+
+4. CHILD SAFETY, REPORTING & MODERATION
+--------------------------------------------------------------------------------
+- User Blocking:
+  * Tapping 'Block' appends target UID to currentUser.blockedUids in Firestore.
+  * Instantly hides chat history, prevents incoming DMs, and removes from peer lists.
+- Abusive Message Reporting:
+  * Long-press message -> 'Report Message' dialog with categories (Harassment,
+    Inappropriate Content, Spam, Other).
+  * Writes incident document to /moderationReports with message snapshot and context.
+- Cloud Function Profanity Screening:
+  * onMessageCreated trigger screens text against regex deny-list before delivery.
+================================================================================

@@ -1,0 +1,63 @@
+================================================================================
+PHASE 4 BLUEPRINT: COMPETITION LAYER, RANKINGS & 3-ROUND STAT BATTLES
+================================================================================
+Goal: Transform individual study achievements into an exciting, tiered RPG competition
+among classmates, schools, and cities.
+
+1. THE RANKING PYRAMID
+--------------------------------------------------------------------------------
+Tier 1: Class Rank
+- Real-time leaderboard within the student's own class and stream.
+- Ranked by total XP accumulated in the current grading cycle / term.
+
+Tier 2: School & Area Rank
+- Compares top rankers of each class against other classes in the school.
+- City/Area Leaderboard compares participating schools within the same municipality.
+
+Tier 3: Weekly Leaderboard & Cross-School Visibility
+- Reset every Monday via the weeklyLeaderboard Cloud Function.
+- Top 10% performers each week unlock 'Cross-School Scout' status:
+  * Grants visibility into elite leaderboards across peer schools.
+  * Unlocks the ability to initiate cross-school competitive battles.
+
+2. HEAD-TO-HEAD BATTLES (3-ROUND STAT DUELS)
+--------------------------------------------------------------------------------
+- Asynchronous Stat Duel Model (Option B from approved plan):
+  * Does not require both students to be online simultaneously.
+  * Prevents real-time networking lag and scheduling friction.
+
+- Battle Initiation:
+  1. Student A challenges Student B (from same class or unlocked peer school).
+  2. Creates document in /battles/{battleId} with status = 'pending'.
+  3. Student B receives push notification via FCM and accepts the duel.
+
+- 3-Round Duel Mechanics:
+  * Round 1: Subject Duel
+    - A random subject both students take is chosen (e.g. Mathematics).
+    - Compares each student's subject XP score with probabilistic variance:
+      P(Win) = Stat_A / (Stat_A + Stat_B).
+  * Round 2: IQ & Accuracy Duel
+    - Compares overall IQ stats (derived from quiz precision).
+  * Round 3: Knowledge Power Duel
+    - Compares total cumulative Knowledge Power.
+
+- Winner Outcome:
+  * Best 2 out of 3 rounds wins the match.
+  * Winner gains +100 XP and increments 'Battle IQ'.
+  * Loser receives +20 consolation XP (encourages participation).
+  * Anti-Farming Rule: A user can only battle the same opponent twice per week.
+
+3. DATA SCHEMAS
+--------------------------------------------------------------------------------
+/battles/{battleId}:
+  challengerUid, challengedUid
+  schoolId, classId
+  status: "pending" | "accepted" | "completed" | "declined"
+  rounds: [
+    { roundNumber: 1, statCategory: "math_10", scoreA: 85, scoreB: 70, winnerUid: uidA },
+    { roundNumber: 2, statCategory: "iq", scoreA: 110, scoreB: 115, winnerUid: uidB },
+    { roundNumber: 3, statCategory: "knowledgePower", scoreA: 450, scoreB: 380, winnerUid: uidA }
+  ]
+  winnerUid: uidA
+  createdAt, completedAt
+================================================================================

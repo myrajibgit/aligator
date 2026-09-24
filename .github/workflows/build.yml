@@ -1,0 +1,183 @@
+name: Build & Package
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+    inputs:
+      build_target:
+        description: 'Build target (all, apk, appbundle, web)'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - apk
+          - appbundle
+          - web
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  JAVA_VERSION: '17'
+  FLUTTER_CHANNEL: 'stable'
+
+jobs:
+  # ───────────────────────────────────────────────────────────────────────────
+  # JOB: Test & Verification
+  # ───────────────────────────────────────────────────────────────────────────
+  test:
+    name: Run Tests & Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run Unit Tests
+        run: flutter test test/unit/
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # JOB: Build Android (APK & AppBundle)
+  # ───────────────────────────────────────────────────────────────────────────
+  build-android:
+    name: Build Android (APK & AAB)
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ github.event.inputs.build_target == null || github.event.inputs.build_target == 'all' || github.event.inputs.build_target == 'apk' || github.event.inputs.build_target == 'appbundle' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Ensure Gradle Wrapper and Android build structure are generated & executable
+      - name: Ensure Android Gradle structure & permissions
+        run: |
+          flutter create --platforms=android .
+          if [ -f "android/gradlew" ]; then
+            chmod +x android/gradlew
+          fi
+
+      # Set up Gradle build caching to accelerate builds and prevent timeouts
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-read-only: false
+
+      # Pre-run Gradle tasks to resolve plugins, Kotlin SDK, and Gradle dependencies
+      - name: Gradle Pre-Build and Dependency Resolution
+        working-directory: android
+        run: |
+          if [ -f "./gradlew" ]; then
+            ./gradlew --version
+            ./gradlew tasks --no-daemon
+            ./gradlew assembleDebug --no-daemon
+          fi
+
+      # Optional: Setup Release Keystore if secrets are supplied in GitHub repo
+      - name: Setup Release Signing Keystore
+        if: env.KEYSTORE_BASE64 != ''
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEY_STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > android/app/keystore.jks
+          cat > android/key.properties <<EOF
+          storePassword=$KEY_STORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          storeFile=keystore.jks
+          EOF
+
+      # Build Release APK
+      - name: Build Android Release APK
+        if: ${{ github.event.inputs.build_target == null || github.event.inputs.build_target == 'all' || github.event.inputs.build_target == 'apk' }}
+        run: flutter build apk --release
+
+      # Build Release Android App Bundle (Google Play Store format)
+      - name: Build Android Release AppBundle
+        if: ${{ github.event.inputs.build_target == null || github.event.inputs.build_target == 'all' || github.event.inputs.build_target == 'appbundle' }}
+        run: flutter build appbundle --release
+
+      # Upload Release APK artifact
+      - name: Upload Release APK
+        if: ${{ github.event.inputs.build_target == null || github.event.inputs.build_target == 'all' || github.event.inputs.build_target == 'apk' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: studycompete-release-apk
+          path: build/app/outputs/flutter-apk/*.apk
+          retention-days: 30
+
+      # Upload Release App Bundle artifact
+      - name: Upload Release AppBundle
+        if: ${{ github.event.inputs.build_target == null || github.event.inputs.build_target == 'all' || github.event.inputs.build_target == 'appbundle' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: studycompete-release-bundle
+          path: build/app/outputs/bundle/release/*.aab
+          retention-days: 90
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # JOB: Build Web
+  # ───────────────────────────────────────────────────────────────────────────
+  build-web:
+    name: Build Flutter Web
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ github.event.inputs.build_target == null || github.event.inputs.build_target == 'all' || github.event.inputs.build_target == 'web' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Web Application
+        run: flutter build web --release
+
+      - name: Upload Web Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: studycompete-web-build
+          path: build/web/
+          retention-days: 30

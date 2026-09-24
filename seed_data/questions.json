@@ -1,0 +1,52 @@
+[
+  {
+    "id": "q_phys_10_01",
+    "subjectId": "physics_10",
+    "chapterId": "Electricity",
+    "text": "What is the SI unit of electric current?",
+    "options": ["Volt", "Ampere", "Ohm", "Watt"],
+    "correctIndex": 1,
+    "difficulty": "easy",
+    "tags": ["Electricity", "Units"]
+  },
+  {
+    "id": "q_phys_10_02",
+    "subjectId": "physics_10",
+    "chapterId": "Electricity",
+    "text": "Which device is used for measuring electric current?",
+    "options": ["Galvanometer", "Ammeter", "Voltmeter", "Potentiometer"],
+    "correctIndex": 1,
+    "difficulty": "easy",
+    "tags": ["Electricity", "Devices"]
+  },
+  {
+    "id": "q_phys_10_03",
+    "subjectId": "physics_10",
+    "chapterId": "Electricity",
+    "text": "If a wire of resistance R is melted and recast to half its length, the new resistance will be:",
+    "options": ["R/4", "R/2", "R", "2R"],
+    "correctIndex": 0,
+    "difficulty": "hard",
+    "tags": ["Electricity", "Resistance"]
+  },
+  {
+    "id": "q_phys_10_04",
+    "subjectId": "physics_10",
+    "chapterId": "Light Reflection and Refraction",
+    "text": "The mirror used as a rear-view mirror in vehicles is:",
+    "options": ["Convex mirror", "Concave mirror", "Plane mirror", "Cylindrical mirror"],
+    "correctIndex": 0,
+    "difficulty": "easy",
+    "tags": ["Light Reflection and Refraction", "Mirrors"]
+  },
+  {
+    "id": "q_phys_10_05",
+    "subjectId": "physics_10",
+    "chapterId": "Light Reflection and Refraction",
+    "text": "Refractive index of water with respect to air is:",
+    "options": ["1.0", "1.33", "1.5", "2.42"],
+    "correctIndex": 1,
+    "difficulty": "medium",
+    "tags": ["Light Reflection and Refraction", "Refraction"]
+  }
+]

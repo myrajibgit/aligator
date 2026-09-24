@@ -1,0 +1,7 @@
+[
+  { "id": "school_001", "name": "Delhi Public School", "city": "New Delhi", "state": "Delhi", "country": "India", "verified": true, "status": "active" },
+  { "id": "school_002", "name": "Kendriya Vidyalaya No. 1", "city": "Mumbai", "state": "Maharashtra", "country": "India", "verified": true, "status": "active" },
+  { "id": "school_003", "name": "St. Xavier's College", "city": "Kolkata", "state": "West Bengal", "country": "India", "verified": true, "status": "active" },
+  { "id": "school_004", "name": "Bangalore International School", "city": "Bengaluru", "state": "Karnataka", "country": "India", "verified": true, "status": "active" },
+  { "id": "school_005", "name": "The Heritage School", "city": "Hyderabad", "state": "Telangana", "country": "India", "verified": true, "status": "active" }
+]

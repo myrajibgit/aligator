@@ -1,0 +1,38 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // ── Profile pictures: owner writes, authenticated reads ──────────────────
+    match /profiles/{uid}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == uid
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    // ── Study photos: owner only ─────────────────────────────────────────────
+    match /study_photos/{uid}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid
+        && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    match /studyPhotos/{uid}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid
+        && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // ── Admin-uploaded syllabus PDFs ─────────────────────────────────────────
+    // - Admin (custom claim admin:true) can write any PDF up to 50 MB.
+    // - Any authenticated student can read the syllabus PDF for their subject.
+    // - Students cannot write or delete.
+    match /syllabi/{subjectId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && request.auth.token.admin == true
+        && request.resource.size < 50 * 1024 * 1024
+        && (request.resource.contentType == 'application/pdf'
+            || request.resource.contentType.matches('image/.*'));
+    }
+
+  }
+}

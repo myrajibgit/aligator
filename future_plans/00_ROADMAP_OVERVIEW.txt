@@ -1,0 +1,43 @@
+================================================================================
+FUTURE PLANS: ROADMAP & SYSTEM ARCHITECTURE OVERVIEW
+================================================================================
+Platform: StudyCompete
+Objective: Gamified Social Study & Inter-School Competition App for Students
+
+Current Status:
+- Phase 1 (Core Academic Loop) is 100% COMPLETE.
+- Phase 2, 3, and 4 are detailed below.
+
+ROADMAP AT A GLANCE:
+--------------------------------------------------------------------------------
+[x] PHASE 1: CORE LOOP (COMPLETED)
+    - Google Auth & Session State
+    - 4-Step Onboarding (Avatar, Unique Handle, School, Class, Stream, Subjects)
+    - Daily Subject Missions Dashboard
+    - 5-Question Multiple Choice Quiz Engine (>=60% passing threshold)
+    - RPG Stats Profile (Knowledge Power, IQ, Subject XP levels)
+    - Firebase Cloud Functions (Triggers & Weekly Leaderboard Scheduler)
+    - Firestore Security Rules & Real-World Seed Data
+
+[ ] PHASE 2: SOCIAL LAYER & STUDY PARTIES (NEXT IMMEDIATE PHASE)
+    - School & Class Scoped Peer Directory
+    - Real-Time 1-on-1 Direct Messaging (DMs)
+    - Study Parties (Squads of 2 to 6 students)
+    - Persistent Party Chat Room
+    - Minor Safety Guardrails: User Blocking, Content Reporting & Filter Queue
+
+[ ] PHASE 3: MISSION VERIFICATION ENGINES
+    - Daily 30-Minute Fitness Mission (Countdown Timer + HealthKit / Google Fit)
+    - Study Verification via Camera Capture
+    - On-Device OCR with Google ML Kit
+    - Curriculum Chapter Keyword Tag Matching
+    - Automated Question Bank Quiz Generation
+
+[ ] PHASE 4: COMPETITIVE RANKINGS & HEAD-TO-HEAD BATTLES
+    - Tiered Leaderboards: Class Rank, School Rank, and Area/City Rank
+    - 3-Round Asynchronous Stat Battles (Duel engine using Knowledge Power & IQ)
+    - Battle IQ Stat Progression & Dynamic Rating System
+    - Top Ranker Visibility & Cross-School Challenge System
+
+Read the respective phase files in this folder for deep technical blueprints.
+================================================================================

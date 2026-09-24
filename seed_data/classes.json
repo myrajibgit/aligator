@@ -1,0 +1,6 @@
+[
+  { "id": "class_10_sci_dps", "schoolId": "school_001", "grade": 10, "stream": "Science", "subjects": ["physics_10", "chemistry_10", "maths_10", "biology_10", "english_10"] },
+  { "id": "class_10_com_dps", "schoolId": "school_001", "grade": 10, "stream": "Commerce", "subjects": ["maths_10", "accountancy_10", "business_10", "economics_10", "english_10"] },
+  { "id": "class_11_sci_dps", "schoolId": "school_001", "grade": 11, "stream": "Science", "subjects": ["physics_11", "chemistry_11", "maths_11", "biology_11", "english_11"] },
+  { "id": "class_12_sci_dps", "schoolId": "school_001", "grade": 12, "stream": "Science", "subjects": ["physics_12", "chemistry_12", "maths_12", "biology_12", "english_12"] }
+]

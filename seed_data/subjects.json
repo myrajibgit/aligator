@@ -1,0 +1,32 @@
+[
+  { 
+    "id": "physics_10", 
+    "name": "Physics", 
+    "classId": "class_10_sci_dps", 
+    "chapters": ["Electricity", "Magnetic Effects of Electric Current", "Light Reflection and Refraction"] 
+  },
+  { 
+    "id": "chemistry_10", 
+    "name": "Chemistry", 
+    "classId": "class_10_sci_dps", 
+    "chapters": ["Chemical Reactions and Equations", "Acids, Bases and Salts", "Metals and Non-Metals"] 
+  },
+  { 
+    "id": "biology_10", 
+    "name": "Biology", 
+    "classId": "class_10_sci_dps", 
+    "chapters": ["Life Processes", "Control and Coordination", "How do Organisms Reproduce"] 
+  },
+  { 
+    "id": "maths_10", 
+    "name": "Mathematics", 
+    "classId": "class_10_sci_dps", 
+    "chapters": ["Real Numbers", "Polynomials", "Pair of Linear Equations in Two Variables"] 
+  },
+  { 
+    "id": "english_10", 
+    "name": "English", 
+    "classId": "class_10_sci_dps", 
+    "chapters": ["A Letter to God", "Nelson Mandela", "Two Stories about Flying"] 
+  }
+]

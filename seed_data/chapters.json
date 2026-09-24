@@ -1,0 +1,50 @@
+[
+  {
+    "subjectId": "physics_10",
+    "id": "Electricity",
+    "name": "Electricity",
+    "keywords": ["current", "ampere", "volt", "voltage", "resistor", "resistance", "ohm", "circuit", "watt", "conductor", "charge", "potential", "ammeter", "voltmeter", "resistivity", "joule", "power"]
+  },
+  {
+    "subjectId": "physics_10",
+    "id": "Light_Reflection_and_Refraction",
+    "name": "Light Reflection and Refraction",
+    "keywords": ["light", "reflection", "refraction", "mirror", "lens", "convex", "concave", "ray", "focal", "optical", "magnification", "incident", "normal", "dioptre", "focus", "retina"]
+  },
+  {
+    "subjectId": "physics_10",
+    "id": "Magnetic_Effects_of_Electric_Current",
+    "name": "Magnetic Effects of Electric Current",
+    "keywords": ["magnet", "magnetic", "field", "solenoid", "electromagnet", "motor", "generator", "induction", "fleming", "compass", "flux", "poles"]
+  },
+  {
+    "subjectId": "chemistry_10",
+    "id": "Chemical_Reactions_and_Equations",
+    "name": "Chemical Reactions and Equations",
+    "keywords": ["reaction", "reactants", "products", "combustion", "oxidation", "reduction", "precipitation", "catalyst", "exothermic", "endothermic", "displacement", "equation"]
+  },
+  {
+    "subjectId": "chemistry_10",
+    "id": "Acids_Bases_and_Salts",
+    "name": "Acids, Bases and Salts",
+    "keywords": ["acid", "base", "salt", "ph", "litmus", "neutralization", "hydrogen", "hydroxide", "indicator", "bleaching", "soda", "plaster"]
+  },
+  {
+    "subjectId": "biology_10",
+    "id": "Life_Processes",
+    "name": "Life Processes",
+    "keywords": ["photosynthesis", "respiration", "circulation", "excretion", "nutrition", "autotrophic", "heterotrophic", "chlorophyll", "enzyme", "hemoglobin", "nephron", "alveoli"]
+  },
+  {
+    "subjectId": "maths_10",
+    "id": "Real_Numbers",
+    "name": "Real Numbers",
+    "keywords": ["rational", "irrational", "lemma", "euclid", "division", "algorithm", "prime", "factorization", "hcf", "lcm", "decimal"]
+  },
+  {
+    "subjectId": "maths_10",
+    "id": "Polynomials",
+    "name": "Polynomials",
+    "keywords": ["polynomial", "quadratic", "cubic", "zeroes", "coefficients", "parabola", "degree", "discriminant", "remainder"]
+  }
+]
