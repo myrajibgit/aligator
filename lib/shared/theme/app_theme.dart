@@ -19,6 +19,7 @@ TextTheme _buildTextTheme(TextTheme base) {
 
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
+
   colorScheme: ColorScheme.fromSeed(
     seedColor: AppColors.primary,
     secondary: AppColors.secondary,
@@ -26,7 +27,9 @@ final ThemeData lightTheme = ThemeData(
     surface: AppColors.surfaceLight,
     brightness: Brightness.light,
   ),
+
   textTheme: _buildTextTheme(ThemeData.light().textTheme),
+
   appBarTheme: AppBarTheme(
     centerTitle: false,
     elevation: 0,
@@ -37,48 +40,73 @@ final ThemeData lightTheme = ThemeData(
       color: const Color(0xFF1C1B1F),
     ),
   ),
-  cardTheme: CardThemeData(
+
+  cardTheme: CardTheme(
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(16),
-      side: BorderSide(color: Colors.black.withValues(alpha: 0.06)),
+      side: BorderSide(
+        color: Colors.black.withOpacity(0.06),
+      ),
     ),
   ),
+
   filledButtonTheme: FilledButtonThemeData(
     style: FilledButton.styleFrom(
       backgroundColor: AppColors.primary,
       foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      textStyle: GoogleFonts.inter(fontWeight: FontWeight.w600),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      textStyle: GoogleFonts.inter(
+        fontWeight: FontWeight.w600,
+      ),
     ),
   ),
+
   chipTheme: ChipThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
   ),
+
   navigationBarTheme: NavigationBarThemeData(
-    indicatorColor: AppColors.primary.withValues(alpha: 0.12),
-    iconTheme: WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.selected)) {
-        return const IconThemeData(color: AppColors.primary);
-      }
-      return const IconThemeData(color: Color(0xFF6B7280));
-    }),
-    labelTextStyle: WidgetStateProperty.resolveWith((states) {
-      return GoogleFonts.inter(
-        fontSize: 11,
-        fontWeight: states.contains(WidgetState.selected)
-            ? FontWeight.w700
-            : FontWeight.w500,
-        color: states.contains(WidgetState.selected)
-            ? AppColors.primary
-            : const Color(0xFF6B7280),
-      );
-    }),
+    indicatorColor: AppColors.primary.withOpacity(0.12),
+
+    iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
+      (states) {
+        if (states.contains(MaterialState.selected)) {
+          return const IconThemeData(
+            color: AppColors.primary,
+          );
+        }
+
+        return const IconThemeData(
+          color: Color(0xFF6B7280),
+        );
+      },
+    ),
+
+    labelTextStyle:
+        MaterialStateProperty.resolveWith<TextStyle>(
+      (states) {
+        return GoogleFonts.inter(
+          fontSize: 11,
+          fontWeight: states.contains(MaterialState.selected)
+              ? FontWeight.w700
+              : FontWeight.w500,
+          color: states.contains(MaterialState.selected)
+              ? AppColors.primary
+              : const Color(0xFF6B7280),
+        );
+      },
+    ),
   ),
 );
 
 final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
+
   colorScheme: ColorScheme.fromSeed(
     seedColor: AppColors.primary,
     secondary: AppColors.secondary,
@@ -86,7 +114,9 @@ final ThemeData darkTheme = ThemeData(
     surface: AppColors.surfaceDark,
     brightness: Brightness.dark,
   ),
+
   textTheme: _buildTextTheme(ThemeData.dark().textTheme),
+
   appBarTheme: AppBarTheme(
     centerTitle: false,
     elevation: 0,
@@ -98,43 +128,68 @@ final ThemeData darkTheme = ThemeData(
       color: Colors.white,
     ),
   ),
-  cardTheme: CardThemeData(
+
+  cardTheme: CardTheme(
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(16),
-      side: BorderSide(color: Colors.white.withValues(alpha: 0.07)),
+      side: BorderSide(
+        color: Colors.white.withOpacity(0.07),
+      ),
     ),
   ),
+
   filledButtonTheme: FilledButtonThemeData(
     style: FilledButton.styleFrom(
       backgroundColor: AppColors.primary,
       foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      textStyle: GoogleFonts.inter(fontWeight: FontWeight.w600),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      textStyle: GoogleFonts.inter(
+        fontWeight: FontWeight.w600,
+      ),
     ),
   ),
+
   chipTheme: ChipThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
   ),
+
   navigationBarTheme: NavigationBarThemeData(
     backgroundColor: AppColors.surfaceDark,
-    indicatorColor: AppColors.primary.withValues(alpha: 0.18),
-    iconTheme: WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.selected)) {
-        return const IconThemeData(color: Color(0xFF818CF8)); // indigo-400
-      }
-      return const IconThemeData(color: Color(0xFF9CA3AF));
-    }),
-    labelTextStyle: WidgetStateProperty.resolveWith((states) {
-      return GoogleFonts.inter(
-        fontSize: 11,
-        fontWeight: states.contains(WidgetState.selected)
-            ? FontWeight.w700
-            : FontWeight.w500,
-        color: states.contains(WidgetState.selected)
-            ? const Color(0xFF818CF8)
-            : const Color(0xFF9CA3AF),
-      );
-    }),
+
+    indicatorColor: AppColors.primary.withOpacity(0.18),
+
+    iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
+      (states) {
+        if (states.contains(MaterialState.selected)) {
+          return const IconThemeData(
+            color: Color(0xFF818CF8),
+          );
+        }
+
+        return const IconThemeData(
+          color: Color(0xFF9CA3AF),
+        );
+      },
+    ),
+
+    labelTextStyle:
+        MaterialStateProperty.resolveWith<TextStyle>(
+      (states) {
+        return GoogleFonts.inter(
+          fontSize: 11,
+          fontWeight: states.contains(MaterialState.selected)
+              ? FontWeight.w700
+              : FontWeight.w500,
+          color: states.contains(MaterialState.selected)
+              ? const Color(0xFF818CF8)
+              : const Color(0xFF9CA3AF),
+        );
+      },
+    ),
   ),
 );
